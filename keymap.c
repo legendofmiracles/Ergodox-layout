@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_EQL,          KC_Q,        KC_W,          KC_E,    KC_R,    KC_T,    KC_LBRC,            TG(SYMB),     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,              KC_BSLS,
   KC_MINS,         KC_A,        KC_S,          KC_D,    KC_F,    KC_G,                                      KC_H,    KC_J,    KC_K,    KC_L,    LT(MDIA, KC_SCLN), GUI_T(KC_QUOT),
   KC_LSFT,         CTL_T(KC_Z), KC_X,          KC_C,    KC_V,    KC_B,    KC_CAPS,            DM_PLY1,      KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_T(KC_SLSH),    KC_RSFT,
-  LT(SYMB,KC_GRV), KC_QUOT,     LALT(KC_LSFT), KC_LEFT, KC_RGHT,                                                     KC_UP,        KC_DOWN, KC_LBRC, KC_RBRC, TT(SYMB),
+  LT(SYMB,KC_GRV), KC_QUOT,     KC_DEL,        KC_LEFT, KC_RGHT,                                                     KC_UP,        KC_DOWN, KC_LBRC, KC_RBRC, TT(SYMB),
 
                                                           ALT_T(KC_APP),  KC_LGUI, /*TG(ASTNOP1),*/ TG(COLEMAK), CTL_T(KC_ESC),
                                                                           DM_REC1,            KC_PGUP,
