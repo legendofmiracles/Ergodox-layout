@@ -5,7 +5,7 @@ enum layers {
     BASE, // default layer
     SYMB, // symbols
     MDIA,  // media keys
-    COLEMAK, // Colemak lol
+    QWERTY, // Colemak lol
 //    ASTNOP1,
 //    ASTNOP2,
 //    ASTNOP3,
@@ -45,13 +45,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [BASE] = LAYOUT_ergodox_pretty(
   // left hand
-  KC_PSCR,         KC_1,        KC_2,          KC_3,    KC_4,    KC_5,    KC_ESC,             KC_RGHT,      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,              KC_MINS,
-  KC_EQL,          KC_Q,        KC_W,          KC_E,    KC_R,    KC_T,    KC_LBRC,            TG(SYMB),     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,              KC_BSLS,
-  KC_MINS,         KC_A,        KC_S,          KC_D,    KC_F,    KC_G,                                      KC_H,    KC_J,    KC_K,    KC_L,    LT(MDIA, KC_SCLN), GUI_T(KC_QUOT),
-  KC_LSFT,         CTL_T(KC_Z), KC_X,          KC_C,    KC_V,    KC_B,    KC_CAPS,            DM_PLY1,      KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_T(KC_SLSH),    KC_RSFT,
-  LT(SYMB,KC_GRV), KC_QUOT,     KC_DEL,        KC_LEFT, KC_RGHT,                                                     KC_UP,   KC_DOWN, KC_LBRC, KC_RBRC, TT(SYMB),
+  KC_PSCR,         KC_1,        KC_2,          KC_3,    KC_4,    KC_5,    KC_ESC,             KC_RGHT,      KC_6,    KC_7,    KC_8,    KC_9,           KC_0,                 KC_MINS,
+  KC_EQL,          KC_Q,        KC_W,          KC_F,    KC_P,    KC_G,    KC_LBRC,            TG(SYMB),     KC_J,    KC_L,    KC_U,    KC_Y,           KC_SCLN,              KC_BSLS,
+  KC_MINS,         KC_A,        KC_R,          KC_S,    KC_T,    KC_D,                                      KC_H,    KC_N,    KC_E,    KC_I,           LT(MDIA, KC_O),       GUI_T(KC_QUOT),
+  KC_LSFT,         CTL_T(KC_Z), KC_X,          KC_C,    KC_V,    KC_B,    LALT_T(KC_RBRC),    KC_CAPS,      KC_K,    KC_M,    KC_COMM, KC_DOT,         CTL_T(KC_SLSH),       KC_RSFT,
+  LT(SYMB,KC_GRV), KC_QUOT,     KC_DEL,        KC_LEFT, KC_RGHT,                                                     KC_UP,   KC_DOWN, CTL_T(KC_TRNS), CTL_T(KC_TRNS),       TT(SYMB),
 
-                                                          ALT_T(KC_APP),  KC_LGUI, /*TG(ASTNOP1),*/ TG(COLEMAK), CTL_T(KC_ESC),
+                                                          ALT_T(KC_APP),  KC_LGUI,            TG(QWERTY), CTL_T(KC_ESC),
                                                                           DM_REC1,            KC_PGUP,
                                                          KC_SPC, KC_BSPC, DM_RSTP,            KC_PGDN, KC_TAB, KC_ENT
 ),
@@ -120,32 +120,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         KC_TRNS,     KC_TRNS,
                                       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_WBAK
 ),
-[COLEMAK] = LAYOUT_ergodox(
+[QWERTY] = LAYOUT_ergodox(
         // left hand
         KC_TRNS,          KC_TRNS,    KC_TRNS,        KC_TRNS,        KC_TRNS,     KC_TRNS,     KC_TRNS,
-        KC_TRNS,          KC_Q,       KC_W,           KC_F,           KC_P,        KC_G,        KC_TRNS,
+        KC_TRNS,          KC_Q,       KC_W,           KC_E,           KC_R,        KC_T,        KC_TRNS,
         KC_TRNS,          KC_A,       KC_R,           KC_S,           KC_T,        KC_D,
-        KC_TRNS,          KC_Z,       KC_X,           KC_C,           KC_V,        KC_B,        KC_TRNS,
+        KC_TRNS,          KC_Z,       KC_X,           KC_C,           KC_V,        KC_B,        LALT_T(KC_RBRC),
         LT(SYMB, KC_GRV), KC_TRNS,    KC_TRNS,        KC_TRNS,        KC_TRNS,
 
-                                                                                KC_TRNS, KC_TRNS,
-                                                                                KC_TRNS,
-                                                                                KC_TRNS, KC_TRNS, KC_TRNS,
+                                                                              KC_TRNS, KC_TRNS,
+                                                                              KC_TRNS,
+                                                                              KC_TRNS, KC_TRNS, KC_TRNS,
 
         // right hand
-        KC_TRNS,         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,   KC_TRNS,              KC_TRNS,
-        TG(SYMB),        KC_J,           KC_L,       KC_U,       KC_Y,      KC_SCLN,              KC_TRNS,
-                         KC_H,           KC_N,       KC_E,       KC_I,      LT(MDIA, KC_O),       KC_TRNS,
-        KC_TRNS,         KC_K,           KC_M,       KC_TRNS,    KC_TRNS,   KC_TRNS,              KC_TRNS,
-                                         KC_TRNS,    KC_TRNS,    KC_TRNS,   KC_TRNS,              KC_TRNS,
+        KC_TRNS,         KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,       KC_TRNS,              KC_TRNS,
+        TG(SYMB),        KC_J,           KC_L,     KC_U,     KC_Y,          KC_SCLN,              KC_TRNS,
+                         KC_H,           KC_N,     KC_E,     KC_I,          LT(MDIA, KC_O),       KC_TRNS,
+        KC_TRNS,         KC_K,           KC_M,     KC_TRNS,  KC_TRNS,       KC_TRNS,              KC_TRNS,
+                                         KC_TRNS,  KC_TRNS,  CTL_T(KC_TRNS),CTL_T(KC_TRNS),       KC_TRNS,
 
         KC_TRNS, KC_TRNS,
         KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS
-)//,
-//[ASTNOP1] = LAYOUT_ergodox_pretty(
-//
-//        )
+)
+
 
 };
 
