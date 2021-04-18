@@ -1,4 +1,3 @@
 RGB_MATRIX_ENABLE = yes
 LTO_ENABLE = yes
-WEBUSB_ENABLE = yes
 RAW_ENABLE = yes
