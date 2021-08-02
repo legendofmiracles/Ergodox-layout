@@ -20,7 +20,8 @@ enum layers {
 };
 
 enum custom_keycodes {
-  RGB_SLD
+  RGB_SLD,
+  WPM
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -51,9 +52,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_EQL,          KC_Q,        KC_W,          KC_F,    KC_P,    KC_G,    KC_LBRC,            KC_CAPS,      KC_J,    KC_L,    KC_U,    KC_Y,      KC_SCLN,            KC_BSLS,
   KC_MINS,         KC_A,        KC_R,          KC_S,    KC_T,    KC_D,                                      KC_H,    KC_N,    KC_E,    KC_I,      LT(MDIA, KC_O),     GUI_T(KC_QUOT),
   KC_LSFT,         CTL_T(KC_Z), KC_X,          KC_C,    KC_V,    KC_B,    LALT_T(KC_RBRC),    KC_ESC,       KC_K,    KC_M,    KC_COMM, KC_DOT,    CTL_T(KC_SLSH),     KC_RSFT,
-  LT(SYMB,KC_GRV), KC_QUOT,     KC_DEL,        KC_LEFT, KC_RGHT,                                                     KC_UP,   KC_DOWN, KC_F22,    KC_F23,             RESET,
+  KC_TRNS,         KC_TRNS,     KC_DEL,        KC_LEFT, KC_RGHT,                                                     KC_UP,   KC_DOWN, KC_TRNS,   KC_TRNS,            LT(SYMB,KC_GRV),
                                                           ALT_T(KC_APP),  KC_LGUI,            TG(QWERTY), CTL_T(KC_ESC),
-                                                                          WEBUSB_PAIR,        KC_PGUP,
+                                                                          KC_TRNS,            KC_PGUP,
                                                          KC_SPC, KC_BSPC, TG(GAY),            KC_PGDN, KC_TAB, KC_ENT
 ),
 /* Keymap 1: Symbol Layer
@@ -86,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   EEP_RST, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                         KC_TRNS, KC_DOT,  KC_0,    KC_EQL,  KC_TRNS,
                                                RGB_MOD, KC_TRNS,     RGB_TOG, RGB_SLD,
                                                         KC_TRNS,     KC_TRNS,
-                                      RGB_VAD, RGB_VAI, KC_TRNS,     KC_TRNS, RGB_HUD, RGB_HUI
+                                      RGB_VAD, RGB_VAI, KC_TRNS,     RESET, RGB_HUD, RGB_HUI
 ),
 /* Keymap 2: Media and mouse keys
  *
@@ -117,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,  KC_MPRV,  KC_MNXT,  KC_TRNS, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,                                         KC_VOLU,  KC_VOLD,  KC_MUTE,  KC_TRNS, KC_TRNS,
 
-                                               KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,
+                                                    WPM,KC_TRNS,     KC_TRNS, KC_TRNS,
                                                         KC_TRNS,     KC_TRNS,
                                       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_WBAK
 ),
@@ -168,6 +169,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_mode(1);
         return false;
       #endif
+
+      case WPM:
+        if (record->event.pressed) {
+                uint8_t n = get_current_wpm();
+                char wpm_counter[4];
+                wpm_counter[3] = '\0';
+                wpm_counter[2] = '0' + n % 10;
+                wpm_counter[1] = (n /= 10) % 10 ? '0' + (n) % 10 : (n / 10) % 10 ? '0' : ' ';
+                wpm_counter[0] = n / 10 ? '0' + n / 10 : ' ';
+                send_string(wpm_counter);
+        } else {
+
+        }
     }
   }
   return true;
