@@ -21,7 +21,7 @@ enum layers {
 
 enum custom_keycodes {
   RGB_SLD,
-  WPM
+//  WPM
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -112,15 +112,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [MDIA] = LAYOUT_ergodox_pretty(
   // left hand
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
-  UC(0x11F),KC_MS_L, KC_MS_D, KC_MS_R,UC(0x221E),       UC(0x3C0),            UC(0x30C4), UC(0xE4), UC(0xF6), UC(0xFC), KC_TRNS, KC_MPLY,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,  KC_MPRV,  KC_MNXT,  KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,                                         KC_VOLU,  KC_VOLD,  KC_MUTE,  KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS, KC_TRNS,    KC_TRNS, UC(0x037D),UC(0x2211),  KC_TRNS, KC_TRNS,
+  // special keys ig
+  UC(0x11F),KC_MS_L, KC_MS_D, KC_MS_R,         UC(0x221E), UC(0x3C0),            UC(0x30C4), UC(0xE4), UC(0xF6), UC(0xFC),    KC_TRNS, KC_MPLY,
+  // chess
+  UC(0x2654), UC(0x2655), UC(0x2656), UC(0x2657), UC(0x2658), KC_TRNS,    KC_TRNS,     UC(0x265B), UC(0x265C),    UC(0x265D),  UC(0x265E),  UC(0x265F),     KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,                                               KC_VOLU,  KC_VOLD,  KC_MUTE,     KC_TRNS, KC_TRNS,
 
-                                                    WPM,KC_TRNS,     KC_TRNS, KC_TRNS,
+                                                KC_TRNS,KC_TRNS,     KC_TRNS, KC_TRNS,
                                                         KC_TRNS,     KC_TRNS,
-                                      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_WBAK
+                                      UC(0x2659), KC_TRNS, KC_TRNS,     KC_TRNS, KC_WBAK, UC(0x265A)
 ),
 [QWERTY] = LAYOUT_ergodox(
         // left hand
@@ -162,6 +164,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+#ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %b, time: %u, interrupt: %b, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+#endif
   if (record->event.pressed) {
     switch (keycode) {
       #ifdef RGBLIGHT_ENABLE
@@ -170,6 +175,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       #endif
 
+      /*
       case WPM:
         if (record->event.pressed) {
                 uint8_t n = get_current_wpm();
@@ -181,7 +187,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 send_string(wpm_counter);
         } else {
 
-        }
+        }*/
     }
   }
   return true;
@@ -191,6 +197,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void keyboard_post_init_user(void) {
 #ifdef RGBLIGHT_COLOR_LAYER_0
   rgblight_setrgb(RGBLIGHT_COLOR_LAYER_0);
+#endif
+#ifdef CONSOLE_ENABLE
+  // Customise these values to desired behaviour
+  debug_enable=true;
+  //debug_matrix=true;
+  //debug_keyboard=true;
+  //debug_mouse=true;
 #endif
 };
 
@@ -262,8 +275,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 };
 
+
 void raw_hid_receive(uint8_t *data, uint8_t length) {
     ergodox_blink_all_leds();
     rgb_matrix_set_color(36, 0x00, 0x00, 0x00);
     raw_hid_send(data, length);
 }
+

@@ -10,12 +10,9 @@ let
   # nix/poetry.lock Use the "poetry update --lock", "poetry add
   # --lock" etc. in the nix folder to adjust the contents of those
   # files if the requirements*.txt files change
-  pythonEnv = poetry2nix.mkPoetryEnv {
-    projectDir = ./nix;
-  };
-in
+  pythonEnv = poetry2nix.mkPoetryEnv { projectDir = ./nix; };
 
-with pkgs;
+in with pkgs;
 let
   avrlibc = pkgsCross.avr.libcCross;
 
@@ -28,18 +25,17 @@ let
     "-B${avrlibc}/avr/lib/avr51"
     "-L${avrlibc}/avr/lib/avr51"
   ];
-in
-mkShell {
+in mkShell {
   name = "qmk-firmware";
 
-  buildInputs = [ clang-tools dfu-programmer dfu-util diffutils git pythonEnv poetry niv ]
+  buildInputs =
+    [ clang-tools dfu-programmer dfu-util diffutils git pythonEnv poetry niv ]
     ++ lib.optional avr [
       pkgsCross.avr.buildPackages.binutils
       pkgsCross.avr.buildPackages.gcc8
       avrlibc
       avrdude
-    ]
-    ++ lib.optional arm [ gcc-arm-embedded ]
+    ] ++ lib.optional arm [ gcc-arm-embedded ]
     ++ lib.optional teensy [ teensy-loader-cli ];
 
   AVR_CFLAGS = lib.optional avr avr_incflags;
