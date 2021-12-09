@@ -112,17 +112,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [MDIA] = LAYOUT_ergodox_pretty(
   // left hand
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS, KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS, KC_TRNS,    KC_TRNS, UC(0x037D),UC(0x2211),  KC_TRNS, KC_TRNS,
-  // special keys ig
-  UC(0x11F),KC_MS_L, KC_MS_D, KC_MS_R,         UC(0x221E), UC(0x3C0),            UC(0x30C4), UC(0xE4), UC(0xF6), UC(0xFC),    KC_TRNS, KC_MPLY,
+  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,    KC_TRNS,          KC_TRNS,    KC_TRNS,    KC_TRNS,   KC_TRNS,   KC_TRNS,     KC_TRNS,  KC_TRNS,
+  KC_TRNS,   KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, UC(0xF1),     UC(0xED),         UC(0xE9),   UC(0xC3),   UC(0x00F8),UC(0x3B8), UC(0x2211),  KC_TRNS,  KC_TRNS,
+  UC(0x223), KC_MS_L, KC_MS_D, KC_MS_R, UC(0x221E),UC(0x3C0),                    UC(0xE1),   UC(0xE4),   UC(0xF6),  UC(0xFC),  KC_TRNS,  KC_MPLY,
   // chess
-  UC(0x2654), UC(0x2655), UC(0x2656), UC(0x2657), UC(0x2658), KC_TRNS,    KC_TRNS,     UC(0x265B), UC(0x265C),    UC(0x265D),  UC(0x265E),  UC(0x265F),     KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,                                               KC_VOLU,  KC_VOLD,  KC_MUTE,     KC_TRNS, KC_TRNS,
+  UC(0x2654),UC(0x2655), UC(0x2656), UC(0x2657),   UC(0x2658), KC_TRNS,KC_TRNS,  UC(0x265B), UC(0x265C),UC(0x265D),UC(0x265E),  UC(0x265F),KC_TRNS, KC_TRNS,
+  KC_TRNS,   KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,                                                        KC_VOLU,   KC_VOLD,   KC_MUTE,     KC_TRNS, KC_TRNS,
 
-                                                KC_TRNS,KC_TRNS,     KC_TRNS, KC_TRNS,
-                                                        KC_TRNS,     KC_TRNS,
-                                      UC(0x2659), KC_TRNS, KC_TRNS,     KC_TRNS, KC_WBAK, UC(0x265A)
+                                                KC_TRNS,KC_TRNS,                 KC_TRNS, KC_TRNS,
+                                                        KC_TRNS,                 KC_TRNS,
+                                   UC(0x2659), KC_TRNS, KC_TRNS,                 KC_TRNS, KC_WBAK, UC(0x265A)
 ),
 [QWERTY] = LAYOUT_ergodox(
         // left hand
